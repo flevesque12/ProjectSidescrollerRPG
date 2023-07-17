@@ -904,6 +904,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   jumpForce: 12
+  dashSpeed: 25
+  dashDuration: 0.2
   collisionMask:
     serializedVersion: 2
     m_Bits: 128
