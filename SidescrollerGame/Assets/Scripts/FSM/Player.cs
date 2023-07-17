@@ -19,7 +19,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float ceillingCheckDistance;
     [SerializeField] private Transform ceillingCheck;
     
-    private bool isWallDetected;
+    public int facingDirection{get; private set;} = 1;
+    private bool facingRight = true;
+
     private bool ceillingDetected;
 
 #region Components
@@ -54,24 +56,34 @@ public class Player : MonoBehaviour
 
 
     private void Update() {
-        stateMachine.currentState.Update();
-
-        
+        stateMachine.currentState.Update(); 
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity){
         	rb.velocity = new Vector2(_xVelocity, _yVelocity);
+            FlipController(_xVelocity);
     }
 
     public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, collisionMask);
 
-    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance, collisionMask);
+    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, collisionMask);
 
     public void CollisionCheck(){
-        isWallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance, collisionMask);
         ceillingDetected = Physics2D.Raycast(ceillingCheck.position,Vector2.up,ceillingCheckDistance, collisionMask);
     }
 
+    public void Flip(){
+        facingDirection = facingDirection * -1;
+        facingRight = !facingRight;
+        transform.Rotate(0,180f,0);
+    }
+
+    public void FlipController(float _x){
+        if(_x > 0 && !facingRight)
+            Flip();
+        else if(_x < 0 && facingRight)
+            Flip();
+    }
 
     protected virtual void OnDrawGizmos() {        
 
@@ -100,12 +112,12 @@ public class Player : MonoBehaviour
         if(IsWallDetected())
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));    
+            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y));    
         }
         else
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));          
+            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y));          
         }
     }
 }
