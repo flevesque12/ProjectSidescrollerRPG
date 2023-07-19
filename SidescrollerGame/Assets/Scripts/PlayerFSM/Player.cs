@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
     public float dashDuration;
     public float dashDirection { get; private set;}
 
+    [Header("Fall modifier info")]
+    [SerializeField] private float m_fallModifier = 2.5f;
+    [SerializeField] private float m_LowJumpModifier = 2f;
+
+
     [Header("Collision Check")]
     [SerializeField] private LayerMask collisionMask; 
     [SerializeField] private float groundCheckDistance;
@@ -39,11 +44,12 @@ public class Player : MonoBehaviour
 #region States
     public PlayerStateMachine stateMachine{get; private set;}
 
-    public PlayerIdleState idleState{get; private set;}
-    public PlayerMoveState moveState{get; private set;}
-    public PlayerJumpState jumpState{get; private set;}
-    public PlayerAirState  airState{get; private set;}
-    public PlayerDashState dashState{get; private set;}
+    public PlayerIdleState      idleState{get; private set;}
+    public PlayerMoveState      moveState{get; private set;}
+    public PlayerJumpState      jumpState{get; private set;}
+    public PlayerAirState       airState{get; private set;}
+    public PlayerDashState      dashState{get; private set;}
+    public PlayerWallSlideState wallSlide{get;private set;}
 #endregion
 
     private void Awake() {
@@ -54,6 +60,7 @@ public class Player : MonoBehaviour
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
         airState  = new PlayerAirState(this, stateMachine, "Jump");
         dashState = new PlayerDashState(this, stateMachine, "Dash");
+        wallSlide = new PlayerWallSlideState(this,stateMachine, "WallSlide");
     }
 
     private void Start() {
@@ -109,6 +116,18 @@ public class Player : MonoBehaviour
             Flip();
         else if(_x < 0 && facingRight)
             Flip();
+    }
+
+    public void FallModifierGravity()
+    {
+        if(rb.velocity.y < 0)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (m_fallModifier - 1) * Time.deltaTime;
+        }
+        else if(rb.velocity.y > 0 && !Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (m_LowJumpModifier - 1) * Time.deltaTime;
+        }
     }
 
     protected virtual void OnDrawGizmos() {        
