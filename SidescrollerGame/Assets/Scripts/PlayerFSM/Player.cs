@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    //make the player some hop in each attack combo to feel more alive
+    [Header("Attack Info")]
+    public Vector2[] attackMovement;
+    public bool isBusy { get; private set;}
 
     [Header("Move Info")]
     public float moveSpeed = 12f;
@@ -17,10 +20,11 @@ public class Player : MonoBehaviour
     public float dashDuration;
     public float dashDirection { get; private set;}
 
-    [Header("Fall modifier info")]
-    [SerializeField] private float m_fallModifier = 2.5f;
-    [SerializeField] private float m_LowJumpModifier = 2f;
-
+    
+    //[Header("Fall modifier info")]
+    private float m_fallModifier = 2.5f;
+    private float m_LowJumpModifier = 2f;
+    
 
     [Header("Collision Check")]
     [SerializeField] private LayerMask collisionMask; 
@@ -80,7 +84,15 @@ public class Player : MonoBehaviour
     private void Update() {
         stateMachine.currentState.Update(); 
 
-        CheckDashInput();
+        CheckDashInput();        
+    }
+
+    public IEnumerator WaitTimer(float _seconds){
+        isBusy = true;
+
+        yield return new WaitForSeconds(_seconds);
+
+        isBusy = false;
     }
 
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
@@ -104,18 +116,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ZeroVelocity() => rb.velocity = new Vector2(0f, 0f);
+
     public void SetVelocity(float _xVelocity, float _yVelocity){
         	rb.velocity = new Vector2(_xVelocity, _yVelocity);
             FlipController(_xVelocity);
-    }
-
-    public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, collisionMask);
-
-    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, collisionMask);
-
-    public void CollisionCheck(){
-        ceillingDetected = Physics2D.Raycast(ceillingCheck.position,Vector2.up,ceillingCheckDistance, collisionMask);
-    }
+    }    
 
     public void Flip(){
         facingDirection = facingDirection * -1;
@@ -140,6 +146,15 @@ public class Player : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (m_LowJumpModifier - 1) * Time.deltaTime;
         }
+    }
+
+#region Collision
+    public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, collisionMask);
+
+    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, collisionMask);
+
+    public void CollisionCheck(){
+        ceillingDetected = Physics2D.Raycast(ceillingCheck.position,Vector2.up,ceillingCheckDistance, collisionMask);
     }
 
     protected virtual void OnDrawGizmos() {        
@@ -177,4 +192,6 @@ public class Player : MonoBehaviour
             Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y));          
         }
     }
+
+#endregion
 }
