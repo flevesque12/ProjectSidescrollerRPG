@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPrimaryAttack : PlayerState
+public class PlayerPrimaryAttackState : PlayerState
 {
 
     private int comboCounter;
@@ -10,7 +10,7 @@ public class PlayerPrimaryAttack : PlayerState
     private float lastTimeAttack;
     private float comboWindow = 2;
 
-    public PlayerPrimaryAttack(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public PlayerPrimaryAttackState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
 
@@ -26,8 +26,14 @@ public class PlayerPrimaryAttack : PlayerState
         //can be set here to make the player attack faster
         //player.anim.speed = 1.2f;
 
+        //ChooseAttackDirection
+        float attackDirection = player.facingDirection;
+        if(xInput != 0){
+            attackDirection = xInput;
+        }
+        
         //make the player advance a number of step between attack combo
-        player.SetVelocity(player.attackMovement[comboCounter].x * player.facingDirection, player.attackMovement[comboCounter].y);
+        player.SetVelocity(player.attackMovement[comboCounter].x * attackDirection, player.attackMovement[comboCounter].y);
 
         stateTimer = 0.1f;
     }
