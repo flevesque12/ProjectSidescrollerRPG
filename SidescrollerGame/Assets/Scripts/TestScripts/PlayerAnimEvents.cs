@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimEvents : MonoBehaviour
+namespace TestScripts
 {
-
-    private TestPlayerScript player;
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerAnimEvents : MonoBehaviour
     {
-        player = GetComponentInParent<TestPlayerScript>();
-    }
 
-    private void AnimationTrigger(){
-        player.AttackOver();
+        private TestPlayerScript player;
+        void Start()
+        {
+            player = GetComponentInParent<TestPlayerScript>();
+        }
+
+        private void AnimationTrigger(){
+            player.AttackOver();
+        }
     }
 }
