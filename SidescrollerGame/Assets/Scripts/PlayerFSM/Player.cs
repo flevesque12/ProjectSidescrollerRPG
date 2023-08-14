@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     //make the player some hop in each attack combo to feel more alive
     [Header("Attack Info")]
@@ -20,31 +20,6 @@ public class Player : MonoBehaviour
     public float dashDuration;
     public float dashDirection { get; private set;}
 
-    
-    //[Header("Fall modifier info")]
-    private float m_fallModifier = 2.5f;
-    private float m_LowJumpModifier = 2f;
-    
-
-    [Header("Collision Check")]
-    [SerializeField] private LayerMask collisionMask; 
-    [SerializeField] private float groundCheckDistance;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float wallCheckDistance;
-    [SerializeField] private Transform wallCheck; 
-    [SerializeField] private float ceillingCheckDistance;
-    [SerializeField] private Transform ceillingCheck;
-    
-    public int facingDirection{get; private set;} = 1;
-    private bool facingRight = true;
-
-    private bool ceillingDetected;
-
-#region Components
-    public Animator    anim { get; private set;}
-    public Rigidbody2D rb { get; private set;}
-#endregion
-
 #region States
     public PlayerStateMachine stateMachine{get; private set;}
 
@@ -59,7 +34,8 @@ public class Player : MonoBehaviour
     public PlayerPrimaryAttackState primaryAttack{get; private set;}
 #endregion
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         stateMachine = new PlayerStateMachine();
 
         idleState = new PlayerIdleState(this,stateMachine,"Idle");
@@ -73,15 +49,15 @@ public class Player : MonoBehaviour
         primaryAttack = new PlayerPrimaryAttackState(this,stateMachine,"Attack");
     }
 
-    private void Start() {
-        anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+    protected override void Start() {
+        base.Start();
 
         stateMachine.Initialize(idleState);
     }
 
 
-    private void Update() {
+    protected override void Update() {
+        base.Update();
         stateMachine.currentState.Update(); 
 
         CheckDashInput();        
@@ -116,82 +92,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ZeroVelocity() => rb.velocity = new Vector2(0f, 0f);
+    
 
-    public void SetVelocity(float _xVelocity, float _yVelocity){
-        	rb.velocity = new Vector2(_xVelocity, _yVelocity);
-            FlipController(_xVelocity);
-    }    
-
-    public void Flip(){
-        facingDirection = facingDirection * -1;
-        facingRight = !facingRight;
-        transform.Rotate(0,180f,0);
-    }
-
-    public void FlipController(float _x){
-        if(_x > 0 && !facingRight)
-            Flip();
-        else if(_x < 0 && facingRight)
-            Flip();
-    }
-
-    public void FallModifierGravity()
-    {
-        if(rb.velocity.y < 0)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (m_fallModifier - 1) * Time.deltaTime;
-        }
-        else if(rb.velocity.y > 0 && !Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (m_LowJumpModifier - 1) * Time.deltaTime;
-        }
-    }
-
-#region Collision
-    public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, collisionMask);
-
-    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, collisionMask);
-
-    public void CollisionCheck(){
-        ceillingDetected = Physics2D.Raycast(ceillingCheck.position,Vector2.up,ceillingCheckDistance, collisionMask);
-    }
-
-    protected virtual void OnDrawGizmos() {        
-
-        if(ceillingDetected)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(ceillingCheck.position, new Vector3(ceillingCheck.position.x, ceillingCheck.position.y - ceillingCheckDistance));  
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(ceillingCheck.position, new Vector3(ceillingCheck.position.x, ceillingCheck.position.y - ceillingCheckDistance));          
-        }
-
-        if(IsGroundDetected())
-        {  
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));          
-        }
-
-        if(IsWallDetected())
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y));    
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y));          
-        }
-    }
-
-#endregion
 }
