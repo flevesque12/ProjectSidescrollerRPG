@@ -13,7 +13,8 @@ public class SkeletonMoveState : EnemyState
 
     public override void Enter()
     {
-        base.Enter();        
+        base.Enter(); 
+        //Debug.Log("enemy move state start");       
     } 
 
     public override void Update()
@@ -21,7 +22,7 @@ public class SkeletonMoveState : EnemyState
         base.Update();  
 
         enemy.SetVelocity(enemy.moveSpeed * enemy.facingDirection, enemy.rb.velocity.y);
-
+        
         if(enemy.IsWallDetected() || !enemy.IsGroundDetected()){
             enemy.Flip();
             stateMachine.ChangeState(enemy.idleState);
