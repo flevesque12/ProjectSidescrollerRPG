@@ -80,7 +80,7 @@ public class Entity : MonoBehaviour
     public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, collisionMask);
 
     
-    public virtual void OnDrawGizmos() {        
+    protected virtual void OnDrawGizmos() {        
        
         if(IsGroundDetected())
         {  

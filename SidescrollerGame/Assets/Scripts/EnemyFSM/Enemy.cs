@@ -5,9 +5,16 @@ using UnityEngine;
 public class Enemy : Entity
 {   
 
+    
     [Header("Movement info")]
     public float moveSpeed;
     public float idleTime;
+
+    [Header("Attack info")]
+    [SerializeField] protected LayerMask playerLayerMask;
+    public float attackDistance;
+    public float attackCooldown;
+    [HideInInspector] public float lastTimeAttacked;
 
     public EnemyStateMachine stateMachine { get; private set; }
 
@@ -22,6 +29,26 @@ public class Enemy : Entity
 
     protected override void Update() {
         base.Update();
-        stateMachine.currentState.Update();
+        stateMachine.currentState.Update();        
     }
+
+    public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+
+    public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, attackDistance, playerLayerMask); 
+
+    protected override void OnDrawGizmos() {
+        base.OnDrawGizmos();
+
+        if(IsPlayerDetected())
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + attackDistance * facingDirection, transform.position.y));    
+        }
+        else
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + attackDistance * facingDirection, transform.position.y));          
+        }
+    }
+
 }
