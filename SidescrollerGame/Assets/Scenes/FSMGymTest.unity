@@ -4034,6 +4034,7 @@ MonoBehaviour:
   facingRight: 1
   moveSpeed: 1.5
   idleTime: 1
+  battleTime: 7
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64

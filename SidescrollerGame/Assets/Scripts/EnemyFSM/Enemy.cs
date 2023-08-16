@@ -9,6 +9,7 @@ public class Enemy : Entity
     [Header("Movement info")]
     public float moveSpeed;
     public float idleTime;
+    public float battleTime;
 
     [Header("Attack info")]
     [SerializeField] protected LayerMask playerLayerMask;
