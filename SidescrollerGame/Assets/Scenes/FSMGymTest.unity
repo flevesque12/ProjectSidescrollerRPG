@@ -3862,6 +3862,8 @@ MonoBehaviour:
   groundCheck: {fileID: 1739236737}
   wallCheckDistance: 0.1
   wallCheck: {fileID: 614682609}
+  knockbackDirection: {x: 0, y: 0}
+  knockbackDuration: 0
   facingRight: 1
   attackMovement:
   - {x: 3, y: 1.5}
@@ -4083,6 +4085,8 @@ MonoBehaviour:
   groundCheck: {fileID: 1233147137}
   wallCheckDistance: 0.51
   wallCheck: {fileID: 85630713}
+  knockbackDirection: {x: 7, y: 5}
+  knockbackDuration: 0.07
   facingRight: 1
   moveSpeed: 1.5
   idleTime: 1
@@ -4134,7 +4138,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 12
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
