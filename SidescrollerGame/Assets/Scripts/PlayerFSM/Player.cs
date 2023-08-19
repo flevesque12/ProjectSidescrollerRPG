@@ -7,6 +7,7 @@ public class Player : Entity
     //make the player some hop in each attack combo to feel more alive
     [Header("Attack Info")]
     public Vector2[] attackMovement;
+    
     public bool isBusy { get; private set;}
 
     [Header("Move Info")]

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine.Editor;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
     [Header("Collision Check")]
+    public Transform attackCheck;
+    public float attackCheckRadius;
     [SerializeField] protected LayerMask collisionMask; 
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform groundCheck;
@@ -23,8 +26,9 @@ public class Entity : MonoBehaviour
     private float m_LowJumpModifier = 2f;
 
     #region Components
-        public Animator    anim { get; private set;}
-        public Rigidbody2D rb { get; private set;}
+        public Animator    anim { get; private set; }
+        public Rigidbody2D rb { get; private set; }
+        public EntityFX fx {get; private set; }
     #endregion
 
     protected virtual void Awake() {
@@ -34,10 +38,16 @@ public class Entity : MonoBehaviour
     protected virtual void Start(){
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        fx = GetComponentInChildren<EntityFX>();
     }
 
     protected virtual void Update() {
     
+    }
+
+    public virtual void Damage(){
+        fx.StartCoroutine("FlashFX");
+        Debug.Log(gameObject.name + "was damaged");
     }
 
     public void ZeroVelocity() => rb.velocity = new Vector2(0f, 0f);
@@ -81,7 +91,10 @@ public class Entity : MonoBehaviour
 
     
     protected virtual void OnDrawGizmos() {        
-       
+        if(attackCheck == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
         if(IsGroundDetected())
         {  
             Gizmos.color = Color.green;

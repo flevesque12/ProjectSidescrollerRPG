@@ -31,6 +31,10 @@ public class SkeletonBattleState : EnemyState
             if(enemy.IsPlayerDetected().distance < enemy.attackDistance){
                 if(CanAttack())
                     stateMachine.ChangeState(enemy.attackState);
+                else
+                    enemy.ZeroVelocity();
+                
+                return;
             }
         }
         else{
@@ -59,7 +63,7 @@ public class SkeletonBattleState : EnemyState
             return true;
         }
 
-        Debug.Log("Attack is on cooldown");
+        
         return false;
     }
 }
