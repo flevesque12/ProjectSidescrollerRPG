@@ -7,6 +7,7 @@ public class Player : Entity
     //make the player some hop in each attack combo to feel more alive
     [Header("Attack Info")]
     public Vector2[] attackMovement;
+    public float counterAttackDuration = 0.2f;
     
     public bool isBusy { get; private set;}
 
@@ -33,6 +34,7 @@ public class Player : Entity
     public PlayerWallJump       wallJump{get; private set;}
 
     public PlayerPrimaryAttackState primaryAttack{get; private set;}
+    public PlayerCouterAttackState couterAttack { get; private set;}
 #endregion
 
     protected override void Awake() {
@@ -48,6 +50,7 @@ public class Player : Entity
         wallJump  = new PlayerWallJump(this, stateMachine, "Jump");
 
         primaryAttack = new PlayerPrimaryAttackState(this,stateMachine,"Attack");
+        couterAttack = new PlayerCouterAttackState(this, stateMachine, "CounterAttack");
     }
 
     protected override void Start() {
