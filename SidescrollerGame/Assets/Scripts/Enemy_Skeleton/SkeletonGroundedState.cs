@@ -17,7 +17,7 @@ public class SkeletonGroundedState : EnemyState
     {
         base.Enter();    
         //slow change it when we have a player management
-        player = GameObject.Find("PlayerFSM").transform;           
+        player = PlayerManager.instance.player.transform;           
     } 
 
     public override void Update()
