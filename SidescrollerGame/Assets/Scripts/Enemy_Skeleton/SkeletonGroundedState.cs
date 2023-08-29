@@ -16,15 +16,14 @@ public class SkeletonGroundedState : EnemyState
     public override void Enter()
     {
         base.Enter();    
-        //slow change it when we have a player management
-        player = PlayerManager.instance.player.transform;           
+        player = PlayerManager.Instance.player.transform;           
     } 
 
     public override void Update()
     {
         base.Update();
 
-        if(enemy.IsPlayerDetected() || Vector2.Distance(enemy.transform.position, player.position) < 2){
+        if(enemy.IsPlayerDetected() || Vector2.Distance(enemy.transform.position, player.position) < 2f){
             stateMachine.ChangeState(enemy.battleState);
         } 
     }

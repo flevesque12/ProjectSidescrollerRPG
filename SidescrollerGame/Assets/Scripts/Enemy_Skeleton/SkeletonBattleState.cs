@@ -17,8 +17,7 @@ public class SkeletonBattleState : EnemyState
     {
         base.Enter();  
          
-        //need to change later 
-        playerTransform = PlayerManager.instance.transform;          
+        playerTransform = PlayerManager.Instance.transform;          
 
     } 
 
