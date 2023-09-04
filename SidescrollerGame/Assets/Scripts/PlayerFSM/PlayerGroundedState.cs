@@ -16,6 +16,10 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+            stateMachine.ChangeState(player.aimSword);
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             stateMachine.ChangeState(player.couterAttack);
