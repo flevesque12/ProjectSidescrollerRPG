@@ -6,6 +6,12 @@ public class Skill : MonoBehaviour
 {
     [SerializeField] protected float coolDown;
     protected float cooldownTimer;
+    protected Player player;
+
+    protected virtual void Start()
+    {
+        player = PlayerManager.Instance.player;
+    }
 
     protected virtual void Update()
     {
@@ -23,7 +29,7 @@ public class Skill : MonoBehaviour
         }
 
         return false;
-        Debug.Log("Skill on cooldown");
+        //Debug.Log("Skill on cooldown");
     }
 
     public virtual void UseSkill()
