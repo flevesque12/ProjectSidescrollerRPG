@@ -37,7 +37,8 @@ public class SkeletonBattleState : EnemyState
                 return;
             }
         }
-        else{
+        else
+        {
             if(stateTimer < 0 || Vector2.Distance(playerTransform.transform.position, enemy.transform.position) > 10)
                 stateMachine.ChangeState(enemy.idleState);
         }

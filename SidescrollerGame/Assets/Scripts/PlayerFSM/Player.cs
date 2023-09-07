@@ -21,6 +21,7 @@ public class Player : Entity
     public float dashDirection { get; private set;}
 
     public SkillManager skill { get; private set; }
+    public GameObject sword; //{ get; private set; }
 
 #region States
     public PlayerStateMachine stateMachine{get; private set;}
@@ -37,7 +38,6 @@ public class Player : Entity
     public PlayerCouterAttackState couterAttack { get; private set;}
 
     public PlayerAimSwordState aimSword { get; private set; }
-
     public PlayerCatchSwordState catchSword { get; private set;}
 #endregion
 
@@ -74,6 +74,16 @@ public class Player : Entity
         CheckDashInput();        
     }
 
+    public void AssignNewSword(GameObject _newSword)
+    {
+        sword = _newSword;
+    }
+
+    public void ClearSword()
+    {
+        Destroy(sword);
+    }
+
     public IEnumerator WaitTimer(float _seconds){
         isBusy = true;
 
@@ -89,9 +99,7 @@ public class Player : Entity
             return;
         }
 
-        
-
-        if(Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.dash.CanUseSkill()){
+        if((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.LeftShift)) && SkillManager.Instance.dash.CanUseSkill()){
             dashDirection = Input.GetAxisRaw("Horizontal");
 
             if(dashDirection == 0)
