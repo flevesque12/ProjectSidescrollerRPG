@@ -2,12 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SwordTypeAbility{
+    Regular,
+    Bounce,
+    Pierce,
+    Spin
+}
+
 public class Sword_Skill : Skill
 {
-    [Header("Skill info")]
+    [Header("Main Sword throw Skill info")]
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Vector2 launchForce;
     [SerializeField] private float swordGravity;
+
+    public SwordTypeAbility swordTypeAbility = SwordTypeAbility.Regular;
+
+    [Header("Bounce Sword Ability Info")]
+    [SerializeField] private int bounceAmount;
+    [SerializeField] private float bounceGravity;
+
+    [Header("Pierce Sword Ability Info")]
+    [SerializeField] private int pierceAmount;
+    [SerializeField] private float pierceGravity;
+
+    [Header("Spin Saw Sword Ability Info")]
+    [SerializeField] private float hitCooldown = 0.35f;
+    [SerializeField] private float maxTravelDistance = 7f;
+    [SerializeField] private float spinDuration = 2f;
+    [SerializeField] private float spinGravity = 1f;
+
 
     private Vector2 finalDirection;
 
@@ -24,6 +48,20 @@ public class Sword_Skill : Skill
         base.Start();
 
         GenerateDots();
+
+        SetupGravity();
+    }
+
+    private void SetupGravity(){
+        if(swordTypeAbility == SwordTypeAbility.Bounce){
+            swordGravity = bounceGravity;            
+        }
+        else if(swordTypeAbility == SwordTypeAbility.Pierce){
+            swordGravity = pierceGravity;
+        }
+        else if(swordTypeAbility == SwordTypeAbility.Spin){
+            swordGravity = spinGravity;
+        }
     }
 
     protected override void Update()
@@ -46,6 +84,17 @@ public class Sword_Skill : Skill
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
         Sword_Skill_Controller newSwordScript = newSword.GetComponent<Sword_Skill_Controller>();
 
+        if(swordTypeAbility == SwordTypeAbility.Bounce){
+            newSwordScript.SetupBounce(true, bounceAmount);
+        }
+        else if(swordTypeAbility == SwordTypeAbility.Pierce){
+            newSwordScript.SetupPierce(pierceAmount);
+        }
+        else if(swordTypeAbility == SwordTypeAbility.Spin){
+            newSwordScript.SetupSpin(true, maxTravelDistance, spinDuration, hitCooldown);
+        }
+
+
         newSwordScript.SetupSword(finalDirection, swordGravity, player);
 
         player.AssignNewSword(newSword);
@@ -53,6 +102,7 @@ public class Sword_Skill : Skill
         DotActive(false);
     }
 
+#region AimRegion
     public Vector2 AimDirection()
     {
         Vector2 playerPosition = player.transform.position;
@@ -89,4 +139,5 @@ public class Sword_Skill : Skill
 
         return position;
     }
+    #endregion
 }
