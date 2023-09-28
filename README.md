@@ -1,7 +1,7 @@
 # ProjectSidescrollerRPG
 This a side scroller game like zelda 2 nes and Faxanadu mechanic.
 
-![SidescrollerRPG](./Doc/MagicGame.png)
+![SidescrollerRPG](./doc/MagicGame.png)
 
 ## Unity Engine Development:
 - C#
