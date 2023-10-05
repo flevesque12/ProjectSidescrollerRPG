@@ -17,7 +17,7 @@ public class EnemyStats : CharacterStats
         enemy.Damage();
     }
 
-    public override void Die()
+    protected override void Die()
     {
         base.Die();
         enemy.Die();

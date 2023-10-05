@@ -3058,7 +3058,7 @@ MonoBehaviour:
   swordGravity: 0.5
   freezeTimeDuration: 1.5
   returnSpeed: 15
-  swordTypeAbility: 0
+  swordTypeAbility: 3
   bounceAmount: 5
   bounceGravity: 5
   bounceSpeed: 20
