@@ -7013,8 +7013,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1292568785, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
+      propertyPath: damage.baseValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292568785, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
+      propertyPath: strength.baseValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292568785, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
       propertyPath: maxHealth.baseValue
       value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292568785, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
+      propertyPath: critChance.baseValue
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 4949279359518277603, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
       propertyPath: m_RootOrder
