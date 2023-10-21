@@ -48,6 +48,8 @@ public class CharacterStats : MonoBehaviour
 
     public int currentHealth;
 
+
+
     public System.Action onHealthChanged;
     protected bool isDead;
 
@@ -55,7 +57,7 @@ public class CharacterStats : MonoBehaviour
     protected virtual void Start()
     {
         critDamage.SetDefaultValue(150);
-        currentHealth = maxHealth.GetValue;
+        currentHealth = GetMaxHealthValue();
         fx = GetComponent<EntityFX>();
     }
 
@@ -86,8 +88,8 @@ public class CharacterStats : MonoBehaviour
         {
             Debug.Log("take burn damage " + igniteDamage);
 
-            currentHealth -= igniteDamage;
-
+            DecreaseHealthBy(igniteDamage);
+            
             if (currentHealth < 0)
             {
                 Die();
@@ -113,7 +115,8 @@ public class CharacterStats : MonoBehaviour
 
         totalDamage = CheckTargetArmorStat(_targetStats, totalDamage);
 
-        //_targetStats.TakeDamage(totalDamage);
+        //here
+        _targetStats.TakeDamage(totalDamage);
 
         MagicalDamage(_targetStats);
     }
@@ -201,8 +204,10 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int _damage)
     {
-        currentHealth -= _damage;
+        DecreaseHealthBy(_damage);
+
         Debug.Log("Total damage: " + _damage);
+
         if (currentHealth < 0 && !isDead)
         {
             Die();
@@ -239,6 +244,11 @@ public class CharacterStats : MonoBehaviour
         float TotalcritDamage = _damage * totalCritPower;
 
         return Mathf.RoundToInt(TotalcritDamage);
+    }
+
+    public int GetMaxHealthValue()
+    {
+        return maxHealth.GetValue + vitality.GetValue * 5;
     }
 
     private int CheckTargetArmorStat(CharacterStats _targetStats, int _totalDamage)

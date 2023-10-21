@@ -29,6 +29,8 @@ public class Entity : MonoBehaviour
     private float m_fallModifier = 2.5f;
     private float m_LowJumpModifier = 2f;
 
+    public System.Action OnFlipped;
+
     #region Components
         public Animator    anim { get; private set; }
         public Rigidbody2D rb { get; private set; }
@@ -105,6 +107,9 @@ public class Entity : MonoBehaviour
         facingDirection = facingDirection * -1;
         facingRight = !facingRight;
         transform.Rotate(0,180f,0);
+
+        if(OnFlipped != null)
+            OnFlipped();
     }
 
     public virtual void FlipController(float _x){

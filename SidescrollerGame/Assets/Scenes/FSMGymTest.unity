@@ -3402,6 +3402,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1359569813, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359569813, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5882823112034115716, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton_1
@@ -7012,21 +7020,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1292568785, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
-      propertyPath: damage.baseValue
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1292568785, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
-      propertyPath: strength.baseValue
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1292568785, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
-      propertyPath: maxHealth.baseValue
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1292568785, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
-      propertyPath: critChance.baseValue
-      value: 99
+    - target: {fileID: 650739984, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4949279359518277603, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
       propertyPath: m_RootOrder
@@ -7146,6 +7142,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1359569813, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359569813, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5882823112034115716, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton
@@ -7193,6 +7197,10 @@ PrefabInstance:
     - target: {fileID: 5882823112034115717, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841352517967894045, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
+      propertyPath: maxHealth.baseValue
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9732ffddab08568428c4aa55f1b2b72a, type: 3}
