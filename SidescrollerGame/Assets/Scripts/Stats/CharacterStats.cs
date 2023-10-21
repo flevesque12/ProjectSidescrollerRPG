@@ -184,19 +184,28 @@ public class CharacterStats : MonoBehaviour
         if (_ignite)
         {
             isIgnited = _ignite;
-            ignitedTimer = 2;
+            ignitedTimer = ailmentsDuration;
+
+            fx.IgniteFx(ailmentsDuration);
         }
 
         if (_chill)
         {
-            chilledTimer = 2;
+            chilledTimer = ailmentsDuration;
             isChilled = _chill;
+
+            float slowPercentage = 0.2f;
+
+            GetComponent<Entity>().SlowEntity(slowPercentage, ailmentsDuration);
+            fx.ChillFx(ailmentsDuration);
         }
 
         if (_shock)
         {
-            shockedTimer = 2;
+            shockedTimer = ailmentsDuration;
             isShocked = _shock;
+
+            fx.ShockedFx(ailmentsDuration);
         }
     }
 

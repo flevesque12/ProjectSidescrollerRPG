@@ -57,6 +57,16 @@ public class Entity : MonoBehaviour
     
     }
 
+    public virtual void SlowEntity(float _slowPercentage, float _slowDuration)
+    {
+
+    }
+
+    protected virtual void ReturnDefaultSpeed()
+    {
+        anim.speed = 1;
+    }
+
     public virtual void Damage(){
         fx.StartCoroutine("FlashFX");
         StartCoroutine("HitKnockback");
