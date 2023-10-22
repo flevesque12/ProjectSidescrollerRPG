@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCouterAttackState : PlayerState
 {
+    private bool canCreateClone;
     public PlayerCouterAttackState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -12,6 +13,7 @@ public class PlayerCouterAttackState : PlayerState
     {
         base.Enter();
 
+        canCreateClone = true;
         stateTimer = player.counterAttackDuration;
         player.anim.SetBool("SuccessfulCounterAttack", false);
     }
@@ -36,6 +38,12 @@ public class PlayerCouterAttackState : PlayerState
                 if(hit.GetComponent<Enemy>().CanBeStunned()) {
                     stateTimer = 10;
                     player.anim.SetBool("SuccessfulCounterAttack", true);
+
+                    if (canCreateClone)
+                    {
+                        canCreateClone = false;
+                        player.skill.clone.CreateCloneOnCounterAttack(hit.transform);
+                    }
                 }
             }
         }

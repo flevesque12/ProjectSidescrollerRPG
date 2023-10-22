@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 1463013555}
   - component: {fileID: 1463013556}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Health_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -766,7 +766,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   iceDamage:
-    baseValue: 2
+    baseValue: 0
     modifiers: 
   lightingDamage:
     baseValue: 0
@@ -775,7 +775,7 @@ MonoBehaviour:
   isChilled: 0
   isShocked: 0
   ailmentsDuration: 4
-  shockStrikePrefab: {fileID: 0}
+  shockStrikePrefab: {fileID: 3239353897734870586, guid: 2979a62b2d8a9b34bb58612909c91bfe, type: 3}
   currentHealth: 0
 --- !u!70 &989944224
 CapsuleCollider2D:

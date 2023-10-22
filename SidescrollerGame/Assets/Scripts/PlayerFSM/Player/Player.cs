@@ -22,7 +22,6 @@ public class Player : Entity
     public float dashSpeed;
     public float dashDuration;
     public float defaultDashSpeed;
-
     public float dashDirection { get; private set;}
 
     public SkillManager skill { get; private set; }

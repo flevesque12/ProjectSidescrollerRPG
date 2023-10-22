@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 660820506}
   - component: {fileID: 660820507}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Health_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -711,6 +711,7 @@ MonoBehaviour:
   swordReturnImpact: 1.5
   dashSpeed: 25
   dashDuration: 0.2
+  defaultDashSpeed: 0
   sword: {fileID: 0}
 --- !u!70 &4949279359518277600
 CapsuleCollider2D:
@@ -821,14 +822,14 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   iceDamage:
-    baseValue: 10
+    baseValue: 0
     modifiers: 
   lightingDamage:
-    baseValue: 2
+    baseValue: 10
     modifiers: 
   isIgnited: 0
   isChilled: 0
   isShocked: 0
   ailmentsDuration: 4
-  shockStrikePrefab: {fileID: 0}
+  shockStrikePrefab: {fileID: 3239353897734870586, guid: 2979a62b2d8a9b34bb58612909c91bfe, type: 3}
   currentHealth: 0
