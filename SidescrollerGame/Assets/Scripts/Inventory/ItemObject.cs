@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
-    private SpriteRenderer sr;
-
     [SerializeField] private ItemData itemData;
 
     private void OnValidate()
     {
+        if (itemData == null)
+            return;
+
+        //change object in hierarchy with icon and name
         GetComponent<SpriteRenderer>().sprite = itemData.icon;
         gameObject.name = "Item object - "+ itemData.itemName;
     }
