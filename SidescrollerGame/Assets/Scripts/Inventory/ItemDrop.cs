@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
-    [SerializeField] private int possibleItemDrop;
+    [SerializeField] private int possibleQuandtityOfItemDrop;
     [SerializeField] private ItemData[] possibleDrop;
+    [SerializeField] private ItemData item;
     private List<ItemData> dropList = new List<ItemData>();
 
     [SerializeField] private GameObject dropPrefab;
@@ -19,7 +20,7 @@ public class ItemDrop : MonoBehaviour
         }
 
 
-        for (int i = 0; i < possibleItemDrop; i++)
+        for (int i = 0; i < possibleQuandtityOfItemDrop; i++)
         {
             ItemData randomItem = dropList[Random.Range(0, dropList.Count - 1)];
 
@@ -27,10 +28,19 @@ public class ItemDrop : MonoBehaviour
             DropItem(randomItem);
         }
     }
+ 
+    public void DropItem()
+    {
+        GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
+
+        Vector2 randomVelocity = new Vector2(Random.Range(-5, 5), Random.Range(15, 20));
 
 
+        newDrop.GetComponent<ItemObject>().SetupItem(item, randomVelocity);
+    }
 
-    protected void DropItem(ItemData _itemData)
+
+    public void DropItem(ItemData _itemData)
     {
         GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
 
