@@ -5047,6 +5047,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipment: []
+  startingItems:
+  - {fileID: 11400000, guid: 4cb44c5c0570af74d8eba680c9ca13e3, type: 2}
+  - {fileID: 11400000, guid: abb009a0515912442a59ec910c24e9ca, type: 2}
+  - {fileID: 11400000, guid: 36ab6333b179f67489b1d0462ebe16a7, type: 2}
+  - {fileID: 11400000, guid: b0273675c77f1ed42a5a08667f743de6, type: 2}
+  - {fileID: 11400000, guid: 5bbcf968ec4b01d40bce05fc12b7dfc7, type: 2}
   inventoryItems: []
   stash: []
   inventorySlotParent: {fileID: 972874948}
@@ -6547,7 +6553,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: abb009a0515912442a59ec910c24e9ca, type: 2}
   rb: {fileID: 0}
-  velocity: {x: 0, y: 0}
 --- !u!212 &1335480634
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6877,7 +6882,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 4cb44c5c0570af74d8eba680c9ca13e3, type: 2}
   rb: {fileID: 0}
-  velocity: {x: 0, y: 0}
 --- !u!212 &1415069912
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -24,11 +24,6 @@ public class Entity : MonoBehaviour
     public bool facingRight = true;
 
     protected bool ceillingDetected;
-
-    //[Header("Fall modifier info")]
-    private float m_fallModifier = 2.5f;
-    private float m_LowJumpModifier = 2f;
-
     public System.Action OnFlipped;
 
     #region Components
@@ -94,19 +89,9 @@ public class Entity : MonoBehaviour
 
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity);
-    }   
+    }  
        
-    public void FallModifierGravity()
-    {
-        if(rb.velocity.y < 0)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (m_fallModifier - 1) * Time.deltaTime;
-        }
-        else if(rb.velocity.y > 0 && !Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (m_LowJumpModifier - 1) * Time.deltaTime;
-        }
-    }
+    
 
 #region FlipSprite
     public virtual void Flip(){

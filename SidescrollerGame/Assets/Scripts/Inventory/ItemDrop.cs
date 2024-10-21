@@ -22,6 +22,7 @@ public class ItemDrop : MonoBehaviour
 
         for (int i = 0; i < possibleQuandtityOfItemDrop; i++)
         {
+            //bug error here to investigate(out of bound)
             ItemData randomItem = dropList[Random.Range(0, dropList.Count - 1)];
 
             dropList.Remove(randomItem);

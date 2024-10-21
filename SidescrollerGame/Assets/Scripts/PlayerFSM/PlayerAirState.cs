@@ -16,8 +16,7 @@ public class PlayerAirState : PlayerState
     public override void Update()
     {
         base.Update();
-        //disable for the begin of the project
-        //player.FallModifierGravity();
+       
 
         if(player.IsWallDetected() && xInput == player.facingDirection)
             stateMachine.ChangeState(player.wallSlide);
