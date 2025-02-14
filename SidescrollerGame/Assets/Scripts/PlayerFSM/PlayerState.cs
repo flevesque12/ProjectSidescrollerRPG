@@ -32,7 +32,11 @@ public class PlayerState
         
         stateTimer -= Time.deltaTime;
 
-        xInput = Input.GetAxisRaw("Horizontal");
+        //xInput = Input.GetAxisRaw("Horizontal");
+        //there is a problem with the input the player cant stop moving
+        xInput = player.inputHandler.MoveInput.x;
+        Debug.Log(xInput);
+
         yInput = Input.GetAxisRaw("Vertical");
         player.anim.SetFloat("yVelocity",rb.velocity.y);
     }

@@ -6528,7 +6528,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4949279359518277602, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
   m_PrefabInstance: {fileID: 4949279358528878383}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1531186800}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc6a78b878ba1e9438c134458881433a, type: 3}
@@ -7594,6 +7594,30 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7125576397970959325, guid: 781e553966b2c754f88cbf59eff2e736, type: 3}
   m_PrefabInstance: {fileID: 248240719}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1531186800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4949279359518277604, guid: 5c01fed60ad889f40a285164f1663535, type: 3}
+  m_PrefabInstance: {fileID: 4949279358528878383}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1531186801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531186800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720a63c00a7274142a6c13c9823822a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerController: {fileID: -944628639613478452, guid: 2aa3789ff10501144b204a424dc62e9f, type: 3}
+  m_ActionMapName: Player
+  move: Move
+  look: Look
+  jump: Jump
+  dash: Dash
+  spring: Spring
 --- !u!1001 &1534012357
 PrefabInstance:
   m_ObjectHideFlags: 0

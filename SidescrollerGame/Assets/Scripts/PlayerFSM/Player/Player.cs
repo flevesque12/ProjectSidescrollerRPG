@@ -27,6 +27,8 @@ public class Player : Entity
     public SkillManager skill { get; private set; }
     public GameObject sword; //{ get; private set; }
 
+    public PlayerInputHandler inputHandler { get; private set; }
+
 #region States
     public PlayerStateMachine stateMachine{get; private set;}
 
@@ -49,6 +51,9 @@ public class Player : Entity
 
     protected override void Awake() {
         base.Awake();
+
+        inputHandler = PlayerInputHandler.Instance;
+
         stateMachine = new PlayerStateMachine();
 
         idleState = new PlayerIdleState(this,stateMachine,"Idle");
